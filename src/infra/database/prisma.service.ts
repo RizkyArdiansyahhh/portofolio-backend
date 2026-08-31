@@ -1,0 +1,20 @@
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { db } from '../../prisma/db';
+
+@Injectable()
+export class PrismaService implements OnModuleInit, OnModuleDestroy {
+  public db = db;
+  private runtime: any;
+
+  async onModuleInit() {
+    this.runtime = await this.db.connect({
+      url: process.env.DATABASE_URL!,
+    });
+  }
+
+  async onModuleDestroy() {
+    if (this.runtime) {
+      await this.runtime.close();
+    }
+  }
+}
