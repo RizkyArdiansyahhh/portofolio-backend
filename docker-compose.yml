@@ -4,7 +4,7 @@ services:
     container_name: portofolio-postgres
     restart: always
     environment:
-      POSTGRES_USER: portofolio-riskidev
+      POSTGRES_USER: portofolio_riskidev
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: portofolio
     volumes:
