@@ -7,6 +7,7 @@ import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { auth } from './infra/auth/auth';
 import { ProjectsModule } from './module/projects/projects.module';
 import { UploadModule } from './module/upload/upload.module';
+import { ExperienceModule } from './module/experience/experience.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UploadModule } from './module/upload/upload.module';
     PrismaModule,
     ProjectsModule,
     UploadModule,
+    ExperienceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

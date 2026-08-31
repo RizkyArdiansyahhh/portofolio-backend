@@ -8,6 +8,10 @@
       "model": "Account",
       "namespace": "public"
     },
+    "experience": {
+      "model": "Experience",
+      "namespace": "public"
+    },
     "project": {
       "model": "Project",
       "namespace": "public"
@@ -28,6 +32,46 @@
   "domain": {
     "namespaces": {
       "public": {
+        "enum": {
+          "EmploymentType": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "FULL_TIME",
+                "value": "FULL_TIME"
+              },
+              {
+                "name": "PART_TIME",
+                "value": "PART_TIME"
+              },
+              {
+                "name": "CONTRACT",
+                "value": "CONTRACT"
+              },
+              {
+                "name": "INTERN",
+                "value": "INTERN"
+              }
+            ]
+          },
+          "WorkArrangement": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "ON_SITE",
+                "value": "ON_SITE"
+              },
+              {
+                "name": "REMOTE",
+                "value": "REMOTE"
+              },
+              {
+                "name": "HYBRID",
+                "value": "HYBRID"
+              }
+            ]
+          }
+        },
         "models": {
           "Account": {
             "fields": {
@@ -184,6 +228,171 @@
               },
               "namespaceId": "public",
               "table": "account"
+            }
+          },
+          "Experience": {
+            "fields": {
+              "company": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "companyLogo": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "companyUrl": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "employmentType": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "EmploymentType",
+                  "namespaceId": "public",
+                  "plane": "domain"
+                }
+              },
+              "endDate": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "location": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "role": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "skills": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "startDate": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "workArrangement": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "WorkArrangement",
+                  "namespaceId": "public",
+                  "plane": "domain"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "company": {
+                  "column": "company"
+                },
+                "companyLogo": {
+                  "column": "companyLogo"
+                },
+                "companyUrl": {
+                  "column": "companyUrl"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "description": {
+                  "column": "description"
+                },
+                "employmentType": {
+                  "column": "employmentType"
+                },
+                "endDate": {
+                  "column": "endDate"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "location": {
+                  "column": "location"
+                },
+                "role": {
+                  "column": "role"
+                },
+                "skills": {
+                  "column": "skills"
+                },
+                "startDate": {
+                  "column": "startDate"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                },
+                "workArrangement": {
+                  "column": "workArrangement"
+                }
+              },
+              "namespaceId": "public",
+              "table": "experience"
             }
           },
           "Project": {
@@ -759,6 +968,128 @@
               },
               "uniques": []
             },
+            "experience": {
+              "checks": [
+                {
+                  "expression": "array_position(\"description\", NULL) IS NULL",
+                  "name": "experience_description_elem_not_null_189f1416",
+                  "prefix": "experience_description_elem_not_null"
+                },
+                {
+                  "expression": "\"employmentType\" IN ('FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERN')",
+                  "name": "experience_employmentType_check_a3ef5608",
+                  "prefix": "experience_employmentType_check"
+                },
+                {
+                  "expression": "array_position(\"skills\", NULL) IS NULL",
+                  "name": "experience_skills_elem_not_null_79c19a4f",
+                  "prefix": "experience_skills_elem_not_null"
+                },
+                {
+                  "expression": "\"workArrangement\" IN ('ON_SITE', 'REMOTE', 'HYBRID')",
+                  "name": "experience_workArrangement_check_ced49d18",
+                  "prefix": "experience_workArrangement_check"
+                }
+              ],
+              "columns": {
+                "company": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "companyLogo": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "companyUrl": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "many": true,
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "employmentType": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "EmploymentType",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "endDate": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "nativeType": "timestamptz",
+                  "nullable": true
+                },
+                "id": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "location": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "role": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "skills": {
+                  "codecId": "pg/text@1",
+                  "many": true,
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "startDate": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "workArrangement": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "WorkArrangement",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "project": {
               "checks": [
                 {
@@ -1095,18 +1426,63 @@
               },
               "uniques": []
             }
+          },
+          "valueSet": {
+            "EmploymentType": {
+              "kind": "valueSet",
+              "values": [
+                "FULL_TIME",
+                "PART_TIME",
+                "CONTRACT",
+                "INTERN"
+              ]
+            },
+            "WorkArrangement": {
+              "kind": "valueSet",
+              "values": [
+                "ON_SITE",
+                "REMOTE",
+                "HYBRID"
+              ]
+            }
           }
         },
         "id": "public",
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "b32ce1fd6aa6429aca3642c13e04a67f87109e5202e850ab3470ed120edcbeea"
+    "storageHash": "e57ce9f1f15ed6fe4854d927d7c4c0cfdcc5e5d0ac9fc24c297aecbe3fc93e2b"
   },
   "execution": {
-    "executionHash": "b6efe37dff7ae293774d8c6318e235617cb2564abe85403a8518704c9b6ae54a",
+    "executionHash": "ca0f968b5bcf2bf9aa6d96bb517f1d997f2cee718231d6a1db1725d0c8ca89ea",
     "mutations": {
       "defaults": [
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "id",
+            "namespace": "public",
+            "table": "experience"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updatedAt",
+            "namespace": "public",
+            "table": "experience"
+          }
+        },
         {
           "onCreate": {
             "id": "uuidv4",

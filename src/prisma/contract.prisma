@@ -83,3 +83,34 @@ model Project{
   @@map("project")
 }
 
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERN
+}
+
+enum WorkArrangement {
+  ON_SITE
+  REMOTE
+  HYBRID
+}
+
+model Experience {
+  id              String           @id @default(uuid())
+  company         String
+  companyLogo     String?
+  companyUrl      String?
+  role            String
+  employmentType  EmploymentType
+  location        String?
+  workArrangement WorkArrangement
+  startDate       Timestamptz
+  endDate         Timestamptz?
+  description     String[]
+  skills          String[]
+  createdAt       Timestamptz      @default(now())
+  updatedAt       temporal.updatedAt()
+
+  @@map("experience")
+}

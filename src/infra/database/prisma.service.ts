@@ -10,6 +10,10 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     return this.db.orm.public.Project;
   }
 
+  get experience() {
+    return this.db.orm.public.Experience;
+  }
+
   get user() {
     return this.db.orm.public.User;
   }
