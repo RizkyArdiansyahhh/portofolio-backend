@@ -18,6 +18,10 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     return this.db.orm.public.User;
   }
 
+  get stack() {
+    return this.db.orm.public.Stack;
+  }
+
   async onModuleInit() {
     this.runtime = await this.db.connect({
       url: process.env.DATABASE_URL!,

@@ -8,6 +8,7 @@ import { auth } from './infra/auth/auth';
 import { ProjectsModule } from './module/projects/projects.module';
 import { UploadModule } from './module/upload/upload.module';
 import { ExperienceModule } from './module/experience/experience.module';
+import { StackModule } from './module/stack/stack.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ExperienceModule } from './module/experience/experience.module';
     ProjectsModule,
     UploadModule,
     ExperienceModule,
+    StackModule,
   ],
   controllers: [AppController],
   providers: [AppService],

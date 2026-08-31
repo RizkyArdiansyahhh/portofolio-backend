@@ -20,6 +20,10 @@
       "model": "Session",
       "namespace": "public"
     },
+    "skill": {
+      "model": "Stack",
+      "namespace": "public"
+    },
     "user": {
       "model": "User",
       "namespace": "public"
@@ -51,6 +55,35 @@
               {
                 "name": "INTERN",
                 "value": "INTERN"
+              }
+            ]
+          },
+          "StackCategory": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "AI_ML",
+                "value": "AI_ML"
+              },
+              {
+                "name": "FRONTEND",
+                "value": "FRONTEND"
+              },
+              {
+                "name": "BACKEND",
+                "value": "BACKEND"
+              },
+              {
+                "name": "CLOUD_DEVOPS",
+                "value": "CLOUD_DEVOPS"
+              },
+              {
+                "name": "DATA_SCIENCE",
+                "value": "DATA_SCIENCE"
+              },
+              {
+                "name": "MOBILE",
+                "value": "MOBILE"
               }
             ]
           },
@@ -665,6 +698,83 @@
               },
               "namespaceId": "public",
               "table": "session"
+            }
+          },
+          "Stack": {
+            "fields": {
+              "category": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "StackCategory",
+                  "namespaceId": "public",
+                  "plane": "domain"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "icon": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "category": {
+                  "column": "category"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "icon": {
+                  "column": "icon"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                }
+              },
+              "namespaceId": "public",
+              "table": "skill"
             }
           },
           "User": {
@@ -1304,6 +1414,65 @@
                 }
               ]
             },
+            "skill": {
+              "checks": [
+                {
+                  "expression": "\"category\" IN ('AI_ML', 'FRONTEND', 'BACKEND', 'CLOUD_DEVOPS', 'DATA_SCIENCE', 'MOBILE')",
+                  "name": "skill_category_check_34d26bb1",
+                  "prefix": "skill_category_check"
+                }
+              ],
+              "columns": {
+                "category": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "StackCategory",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "icon": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "user": {
               "columns": {
                 "createdAt": {
@@ -1437,6 +1606,17 @@
                 "INTERN"
               ]
             },
+            "StackCategory": {
+              "kind": "valueSet",
+              "values": [
+                "AI_ML",
+                "FRONTEND",
+                "BACKEND",
+                "CLOUD_DEVOPS",
+                "DATA_SCIENCE",
+                "MOBILE"
+              ]
+            },
             "WorkArrangement": {
               "kind": "valueSet",
               "values": [
@@ -1451,10 +1631,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "e57ce9f1f15ed6fe4854d927d7c4c0cfdcc5e5d0ac9fc24c297aecbe3fc93e2b"
+    "storageHash": "e74587216d67617b165d0006c0e670b3a116ba9dd48e691d2829f21fdec66243"
   },
   "execution": {
-    "executionHash": "ca0f968b5bcf2bf9aa6d96bb517f1d997f2cee718231d6a1db1725d0c8ca89ea",
+    "executionHash": "e14e7f9703a1224b3d2bda3085964b5823b08a8ab8733ab3bae7f7f75d91c7a1",
     "mutations": {
       "defaults": [
         {
@@ -1507,6 +1687,32 @@
             "column": "updatedAt",
             "namespace": "public",
             "table": "project"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "uuidv4",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "id",
+            "namespace": "public",
+            "table": "skill"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updatedAt",
+            "namespace": "public",
+            "table": "skill"
           }
         }
       ]

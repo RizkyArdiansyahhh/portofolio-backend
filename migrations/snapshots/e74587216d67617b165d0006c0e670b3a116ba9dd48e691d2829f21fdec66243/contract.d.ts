@@ -299,7 +299,7 @@ export type FieldOutputTypes = {
       readonly userAgent: CodecTypes['pg/text@1']['output'] | null;
       readonly userId: CodecTypes['pg/text@1']['output'];
     };
-    readonly Stack: {
+    readonly Skill: {
       readonly id: CodecTypes['pg/text@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly category:
@@ -387,7 +387,7 @@ export type FieldInputTypes = {
       readonly userAgent: CodecTypes['pg/text@1']['input'] | null;
       readonly userId: CodecTypes['pg/text@1']['input'];
     };
-    readonly Stack: {
+    readonly Skill: {
       readonly id: CodecTypes['pg/text@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly category:
@@ -1113,7 +1113,7 @@ type ContractBase = Omit<
       readonly namespace: 'public' & NamespaceId;
       readonly model: 'Experience';
     };
-    readonly skill: { readonly namespace: 'public' & NamespaceId; readonly model: 'Stack' };
+    readonly skill: { readonly namespace: 'public' & NamespaceId; readonly model: 'Skill' };
   };
   readonly domain: {
     readonly namespaces: {
@@ -1476,7 +1476,7 @@ type ContractBase = Omit<
               };
             };
           };
-          readonly Stack: {
+          readonly Skill: {
             readonly fields: {
               readonly id: {
                 readonly nullable: false;

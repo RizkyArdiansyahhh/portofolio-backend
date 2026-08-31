@@ -114,3 +114,21 @@ model Experience {
 
   @@map("experience")
 }
+
+enum StackCategory {
+  AI_ML
+  FRONTEND
+  BACKEND
+  CLOUD_DEVOPS
+  DATA_SCIENCE
+  MOBILE
+}
+model Stack {
+  id        String        @id @default(uuid())
+  name      String
+  category  StackCategory
+  icon      String
+  createdAt Timestamptz   @default(now())
+  updatedAt temporal.updatedAt()
+  @@map("skill")
+}
