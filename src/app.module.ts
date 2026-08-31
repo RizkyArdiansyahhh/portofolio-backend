@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './infra/database/prisma.module';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { auth } from './infra/auth/auth';
+import { ProjectsModule } from './module/projects/projects.module';
+import { UploadModule } from './module/upload/upload.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { auth } from './infra/auth/auth';
     }),
     AuthModule.forRoot({auth}),
     PrismaModule,
+    ProjectsModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],

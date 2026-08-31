@@ -61,3 +61,25 @@ model Verification {
   @@index([identifier], map: "verification_identifier_idx")
   @@map("verification")
 }
+
+
+model Project{
+  id  String @id @default(uuid())
+  title String
+  slug String @unique
+  description String
+  liveUrl String
+  githubUrl String
+  ownership String
+  role String
+  team String?
+  features String[]
+  techStack String[]
+  impact String[]
+  images String[]
+  createdAt Timestamptz @default(now())
+  updatedAt temporal.updatedAt()
+
+  @@map("project")
+}
+
