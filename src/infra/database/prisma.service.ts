@@ -6,6 +6,10 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
   public db = db;
   private runtime: any;
 
+  get certificate() {
+    return this.db.orm.public.Certificate;
+  }
+
   get publication() {
     return this.db.orm.public.Publication;
   }

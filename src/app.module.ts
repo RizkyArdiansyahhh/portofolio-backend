@@ -10,6 +10,7 @@ import { UploadModule } from './module/upload/upload.module';
 import { ExperienceModule } from './module/experience/experience.module';
 import { StackModule } from './module/stack/stack.module';
 import { PublicationModule } from './module/publication/publication.module';
+import { CertificateModule } from './module/certificate/certificate.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PublicationModule } from './module/publication/publication.module';
     ExperienceModule,
     StackModule,
     PublicationModule,
+    CertificateModule,
   ],
   controllers: [AppController],
   providers: [AppService],
