@@ -132,3 +132,29 @@ model Stack {
   updatedAt temporal.updatedAt()
   @@map("skill")
 }
+
+
+model publication {
+  id String @id @default(uuid())
+  title String @unique
+  published DateTime
+  venue String
+  url String
+  createdAt Timestamptz @default(now())
+  updatedAt temporal.updatedAt()
+
+  @@map("publication")
+}
+
+model certification {
+  id String @id @default(uuid())
+  title String @unique
+  issuedAt DateTime
+  issuer String 
+  url String
+  imageUrl String
+  createdAt Timestamptz @default(now())
+  updatedAt temporal.updatedAt()
+
+  @@map("certification")
+}

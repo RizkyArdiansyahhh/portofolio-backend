@@ -9,6 +9,7 @@ import { ProjectsModule } from './module/projects/projects.module';
 import { UploadModule } from './module/upload/upload.module';
 import { ExperienceModule } from './module/experience/experience.module';
 import { StackModule } from './module/stack/stack.module';
+import { PublicationModule } from './module/publication/publication.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { StackModule } from './module/stack/stack.module';
     UploadModule,
     ExperienceModule,
     StackModule,
+    PublicationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
